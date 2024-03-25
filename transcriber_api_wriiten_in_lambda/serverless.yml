@@ -1,0 +1,65 @@
+service: transcriber-client-api
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: ap-southeast-1
+  timeout: 20
+  stage: production
+  environment:
+    AWS_S3_BUCKET: ${file(./config/serverless.env.yml):AWS_S3_BUCKET}
+    AWS_S3_ROOT_PATH: ${file(./config/serverless.env.yml):AWS_S3_ROOT_PATH}
+    AWS_ACCESS: ${file(./config/serverless.env.yml):AWS_ACCESS}
+    AWS_SECRET: ${file(./config/serverless.env.yml):AWS_SECRET}
+  apiGateway:
+    binaryMediaTypes:
+      - "multipart/form-data"
+      
+  
+
+
+
+
+functions:
+  listTranscripts:
+    handler: index.listTranscripts
+    events:
+      - http:
+          path: transcripts/
+          method: get
+          private: false
+          cors:
+            origin: "*"
+            headers:
+              
+              - Content-Type
+            allowCredentials: false
+
+  
+  getTranscript:
+    handler: index.getTranscript
+    events:
+      - http:
+          path: transcripts/download
+          method: post
+          private: false
+          cors:
+            origin: "*"
+            headers:
+              
+              - Content-Type
+            allowCredentials: false
+
+  uploadVoiceFile:
+    handler: index.uploadVoiceFile
+    events:
+      - http:
+          path: transcripts/
+          method: post
+          private: false
+          cors:
+            origin: "*"
+            headers:
+              
+              - Content-Type
+            allowCredentials: false
+  

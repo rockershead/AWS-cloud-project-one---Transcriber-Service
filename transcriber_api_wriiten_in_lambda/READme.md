@@ -1,1 +1,1 @@
-
+These lambda functions are executed as API gateway endpoints.They serve as a means for users to upload voice files for transcription and they will be to see their transcripts using these APIs.Unfortunately,the max upload size is 10MB which is very small.Voice files are all bigger than this.Hence an express.js API had to be built.
