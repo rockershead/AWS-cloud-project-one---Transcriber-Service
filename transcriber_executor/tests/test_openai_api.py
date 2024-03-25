@@ -38,7 +38,7 @@ def transcribe_voice_file(api_key, audio_file_path):
         return None
 
 
-api_key = "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"
+api_key = ""
 
 audio_file_path = "./voice_files/voice_001.mp3"
 
