@@ -11,7 +11,7 @@ module.exports = () => {
   const api = router();
 
   api.post("/", show());
-  api.post("/uploadVoiceFile", upload.single("video"), uploadVoiceFile());
+  api.post("/uploadVoiceFile", upload.single("file"), uploadVoiceFile());
   api.get("/", list());
 
   return api;
