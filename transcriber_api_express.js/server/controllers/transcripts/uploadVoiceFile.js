@@ -7,7 +7,11 @@ const uploadVoiceFile = () => async (req, res, next) => {
     const path = `${process.env.AWS_S3_UPLOAD_PATH}/${originalname}`;
 
     const result = await uploadFile(path, process.env.AWS_S3_BUCKET, buffer);
-    res.status(200).send(result);
+    res
+      .status(200)
+      .send(
+        "File Uploaded Successfully.Please wait while we transcribe your file"
+      );
   } catch (err) {
     res.status(500).send(err);
   }

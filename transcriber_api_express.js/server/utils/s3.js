@@ -84,7 +84,7 @@ async function uploadFile(path, bucket, body) {
     //convert into buffer
     _body = await streamToBuffer(body);
   }
-  console.log(_body);
+
   const client = getClient();
   const command = new PutObjectCommand({
     Bucket: bucket,
