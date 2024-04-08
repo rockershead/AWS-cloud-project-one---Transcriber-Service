@@ -1,0 +1,28 @@
+.transcript-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .transcript-container {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .transcript-container:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .filename {
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .filename:hover {
+    text-decoration: underline;
+  }
+  
