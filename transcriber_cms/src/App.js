@@ -1,4 +1,5 @@
 import "./App.css";
+import { Container, Row, Col } from "react-bootstrap";
 import {
   BrowserRouter as Router,
   Route,
@@ -6,42 +7,45 @@ import {
   Navigate,
   BrowserRouter,
 } from "react-router-dom";
-//import Login from "./pages/Login";
-//import Register from "./pages/Register";
-//import ForgotPassword from "./pages/ForgotPassword";
+
 import UploadVoiceFile from "./pages/UploadVoiceFile";
 import TranscriptList from "./pages/TranscriptList";
-//import ProductList from "./pages/ProductList";
-//import NewPassword from "./pages/NewPassword";
-//import Cart from "./pages/Cart";
+import Login from "./pages/Login";
 
-//import { useAuthContext } from "./hooks/useAuthContext";
+import { useAuthContext } from "./hooks/useAuthContext";
 
 function App() {
-  //const { user, isLoading } = useAuthContext();
+  const { user, isLoading } = useAuthContext();
 
-  //if (isLoading) {
-  // Render a loading indicator while isLoading is true
-  // return <p>Loading...</p>;
-  //}
+  if (isLoading) {
+    //Render a loading indicator while isLoading is true
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/uploadvoicefile"
-            element={<UploadVoiceFile />}
-            //element={user ? <UploadProduct /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/transcriptlist"
-            element={<TranscriptList />}
-            //element={user ? <UploadProduct /> : <Navigate to="/login" />}
-          />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <Container style={{ width: "400px" }}>
+      <Row>
+        <Col>
+          <BrowserRouter>
+            <Routes>
+              <Route
+                path="/uploadvoicefile"
+                //element={<UploadVoiceFile />}
+
+                element={user ? <UploadVoiceFile /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/transcriptlist"
+                //element={<TranscriptList />}
+
+                element={user ? <TranscriptList /> : <Navigate to="/login" />}
+              />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </BrowserRouter>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

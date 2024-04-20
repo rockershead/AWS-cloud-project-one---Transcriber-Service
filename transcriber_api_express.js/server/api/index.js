@@ -9,7 +9,7 @@ const transcripts = require("../controllers/transcripts");
 const routersInit = (config) => {
   const router = express();
 
-  //router.use(permissionHandler);
+  router.use(permissionHandler);
   router.use("/transcripts", transcripts());
 
   // Define API Endpoints

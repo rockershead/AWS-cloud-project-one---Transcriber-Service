@@ -1,28 +1,45 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../css/transcriptList.css";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 function TranscriptList() {
   const [transcripts, setTranscripts] = useState([]);
-
-  const userId = "9dd2999b9ee24788ba9d1fbaf9e7d934"; //for testing
+  const [loading, setLoading] = useState(true);
+  const { user } = useAuthContext();
 
   useEffect(() => {
     // Fetch transcripts data when component mounts
     axios
-      .get(`${process.env.REACT_APP_API_URL}/transcripts/${userId}`)
+      .get(`${process.env.REACT_APP_API_URL}/transcripts/`, {
+        headers: {
+          //"Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      })
       .then((response) => {
         setTranscripts(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching transcripts:", error);
+        setLoading(false);
       });
   }, []);
 
   const handleDownload = (path) => {
     // Make a POST request to get the presigned URL
     axios
-      .post(`${process.env.REACT_APP_API_URL}/transcripts`, { path })
+      .post(
+        `${process.env.REACT_APP_API_URL}/transcripts`,
+        { path },
+        {
+          headers: {
+            //  "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        }
+      )
       .then((response) => {
         window.open(response.data);
       })

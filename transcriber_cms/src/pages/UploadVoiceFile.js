@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { useAuthContext } from "../hooks/useAuthContext";
 //import NavBar from "../components/NavBar";
 //import { useAuthContext } from "../hooks/useAuthContext";
 import {
@@ -37,8 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 const UploadVoiceFile = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-
-  //const { user } = useAuthContext();
+  const { user } = useAuthContext();
 
   const classes = useStyles();
 
@@ -60,13 +59,13 @@ const UploadVoiceFile = () => {
     try {
       const response = await axios.post(
         process.env.REACT_APP_API_URL + "/transcripts/uploadVoiceFile",
-        formData
-        //{
-        // headers: {
-        //  "Content-Type": "multipart/form-data",
-        //  Authorization: `Bearer ${user.idToken}`,
-        // },
-        //}
+        formData,
+        {
+          headers: {
+            //  "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        }
       );
 
       alert(response.data);

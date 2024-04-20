@@ -18,6 +18,8 @@
     "express-acl": "^2.0.9",
     "express-session": "^1.18.0",
     "express-useragent": "^1.0.15",
+    "firebase": "^8.5.0",
+    "firebase-admin": "^9.6.0",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "multer": "^1.4.5-lts.1",

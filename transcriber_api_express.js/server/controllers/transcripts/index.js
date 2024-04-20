@@ -12,7 +12,7 @@ module.exports = () => {
 
   api.post("/", show());
   api.post("/uploadVoiceFile", upload.single("file"), uploadVoiceFile());
-  api.get("/:userId", list());
+  api.get("/", list());
 
   return api;
 };
