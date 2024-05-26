@@ -10,3 +10,7 @@ steps to zip and deploy to lambda
 
 
 Architecture:
+
+![transcriber_executor (1)](https://github.com/rockershead/transcriber_service/assets/35405146/493ae237-74cd-48a8-af5c-ab4e73256902)
+
+
