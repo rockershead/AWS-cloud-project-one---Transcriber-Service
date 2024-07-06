@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import os
 import boto3
 import time
+import json
 
 load_dotenv()
 
@@ -146,9 +147,10 @@ def main(event, context):
     # process the event
     print(event)
     currentunixtimestamp = int(time.time())
-    bucket_name = event['Records'][0]['s3']['bucket']['name']
+    body = json.loads(event['Records'][0]['body'])
+    bucket_name = body['Records'][0]["s3"]["bucket"]["name"]
     # eg.'voice_files/{user_uuid}-{filename}'  take note uuid got dashes.so on client app side must remove dashes.
-    object_key = event['Records'][0]['s3']['object']['key']
+    object_key = body['Records'][0]["s3"]["object"]["key"]
 
     full_filename = object_key.split('/')[1]
     user_uuid = full_filename.split('-')[0]
