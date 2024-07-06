@@ -4,14 +4,15 @@
 - 2)cd package;zip -r ../deployment.zip .
 - 3)cd ..;zip -r deployment.zip ffmpge/
 - 4)zip -r deployment.zip index.py
-- 5)zip -r deployment.zip xxxx.mp3 (if need to test with inbuilt mp3 file)
-- 6)Deploy to lambda;make sure lambda python environment used is python 3.10
-- 7)Make sure timeout is set to 5mins;set memory to 3008MB;Give s3 permissions to lambda function
-- 8)Set the necessary environment variables within the lambda function on the aws dashboard
+- 5) Zipped file is to be uploaded to s3 bucket
+- 6)Deploy lambda with its configurations using terraform(see terraform deployment). Remember to indicate in terraform the s3 url used to store the zipped lambda. 
+
+ 
 
 
 Architecture:
 
-![transcriber_executor (1)](https://github.com/rockershead/transcriber_service/assets/35405146/493ae237-74cd-48a8-af5c-ab4e73256902)
+![transcriber_executor (2)](https://github.com/rockershead/transcriber_service/assets/35405146/81e886db-1557-4120-8a57-978619dc4988)
+
 
 
