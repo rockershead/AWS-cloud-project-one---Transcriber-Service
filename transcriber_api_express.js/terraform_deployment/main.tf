@@ -28,6 +28,7 @@ module "transcriber_api" {
   ecs_service_name     = var.ecs_service_name
   ecr_repo_url         = var.ecr_repo_url
   container_port       = var.container_port
+  domain_name          = var.domain_name
 
 }
 

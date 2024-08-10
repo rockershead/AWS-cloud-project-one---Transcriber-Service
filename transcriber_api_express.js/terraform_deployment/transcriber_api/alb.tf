@@ -66,3 +66,24 @@ resource "aws_lb_listener" "http" {
   }
 }
 
+
+
+##route 53 config. in this case I am using alias
+
+data "aws_route53_zone" "my_zone" {
+  name = var.domain_name # Replace with your domain name
+}
+
+resource "aws_route53_record" "alias_record" {
+  zone_id = data.aws_route53_zone.my_zone.zone_id
+  name    = "www.${var.domain_name}"
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.my_lb.dns_name
+    zone_id                = aws_lb.my_lb.zone_id
+    evaluate_target_health = true
+  }
+
+  depends_on = [aws_lb.my_lb]
+}

@@ -72,3 +72,10 @@ variable "container_port" {
 
 
 }
+
+variable "domain_name" {
+  type        = string
+  description = "domain name of site"
+
+
+}

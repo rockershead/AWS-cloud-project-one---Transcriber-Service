@@ -76,3 +76,10 @@ variable "container_port" {
   default     = 8087
 
 }
+
+variable "domain_name" {
+  type        = string
+  description = "domain name of site"
+  default     = ""
+
+}
