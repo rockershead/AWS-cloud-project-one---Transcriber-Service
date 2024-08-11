@@ -28,7 +28,7 @@ resource "aws_security_group" "alb_sg" {
 
 resource "aws_lb_target_group" "my_tg" {
   name        = "${var.ecs_service_name}-tg"
-  port        = var.container_port
+  port        = var.container_port ##8087
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
@@ -55,6 +55,7 @@ resource "aws_lb" "my_lb" {
   subnets            = [for subnet in aws_subnet.public_subnets : subnet.id]
 }
 
+#listener rule
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.my_lb.arn
   port              = "80"
@@ -86,4 +87,28 @@ resource "aws_route53_record" "alias_record" {
   }
 
   depends_on = [aws_lb.my_lb]
+}
+
+
+##for acm ssl cert
+
+data "aws_acm_certificate" "amazon_issued" {
+  domain = "www.${var.domain_name}"
+  types  = ["AMAZON_ISSUED"]
+  #most_recent = true
+}
+
+# New Listener on Port 443 with SSL/TLS
+resource "aws_lb_listener" "https_listener" {
+  load_balancer_arn = aws_lb.my_lb.arn
+  port              = 443
+  protocol          = "HTTPS"
+
+  ssl_policy      = "ELBSecurityPolicy-TLS13-1-2-2021-06" # You can use a different policy
+  certificate_arn = data.aws_acm_certificate.amazon_issued.arn
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.my_tg.arn
+  }
 }
