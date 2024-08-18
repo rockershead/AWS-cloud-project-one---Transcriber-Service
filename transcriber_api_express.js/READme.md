@@ -1,3 +1,4 @@
+This is a simple express.js api to upload a file, retrieve to s3 bucket.For now there is no authntication involved
 
 Important elements in an ecs:
 

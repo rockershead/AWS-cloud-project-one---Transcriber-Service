@@ -21,9 +21,9 @@ function getClient() {
   });*/
   const client = new S3Client({
     credentials: {
-      region: process.env.AWS_REGION,
-      accessKeyId: process.env.AWS_ACCESS,
-      secretAccessKey: process.env.AWS_SECRET,
+      region: process.env.REGION,
+      accessKeyId: process.env.ACCESS,
+      secretAccessKey: process.env.SECRET,
     },
   });
   return client;

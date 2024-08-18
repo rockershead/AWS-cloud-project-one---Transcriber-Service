@@ -2,13 +2,13 @@ const { uploadFile, getFiles3Url, listFiles } = require("../../utils");
 
 const list = () => async (req, res, next) => {
   try {
-    const decodedToken = res.locals.result;
+    //const decodedToken = res.locals.result;
 
-    const { user_id } = decodedToken;
-
+    //const { user_id } = decodedToken;
+    const user_id = "0013567"; //for testing
     const result = await listFiles(
-      `${process.env.AWS_S3_RETRIEVE_PATH}/${user_id}/`,
-      process.env.AWS_S3_BUCKET
+      `${process.env.S3_RETRIEVE_PATH}/${user_id}/`,
+      process.env.S3_BUCKET
     );
     const files = [];
     result.forEach((path) => {
